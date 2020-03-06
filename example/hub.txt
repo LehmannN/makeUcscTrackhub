@@ -1,0 +1,5 @@
+hub 1909_trackhub01
+shortLabel 1909_trackhub01
+longLabel 1909_trackhub01
+genomesFile genomes.txt
+email lehmann@biologie.ens.fr
