@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
+# From https://genome.ucsc.edu/goldenPath/help/bigGenePred.html
+ft_get_helper_file () {
+    echo Downloading missing file bigGenePred.as
+    wget https://genome.ucsc.edu/goldenPath/help/examples/bigGenePred.as
+    mv bigGenePred.as ../tmp/
+}
+
+ft_get_chrom_sizes () {
+    echo Dowmloading missing file $1.chrom.sizes
+    wget http://hgdownload.soe.ucsc.edu/goldenPath/$1/bigZips/$1.chrom.sizes
+    mv $1.chrom.sizes ../tmp/chrom.sizes
+}
+
 ft_get_extension () {
     F=$(basename "$1")
     ext=${F##*\.}
@@ -15,13 +28,11 @@ ft_check_extension_convert () {
             out=0 ;;
         'GFF' )
             out=1 ;;
-        'SAM' )
-            out=2 ;;
         'BAM' )
-            out=3 ;;
+            out=2 ;;
          * )
             printf "ERROR: this file format is not allowed. \n"
-            printf "Please make sure you use GTF, GFF, SAM or BAM file. \n"
+            printf "Please make sure you use GTF, GFF, or BAM file. \n"
             printf "Note it is note case sensitive (.gtf, .Gtf, .GTF are identical). Error number : \n" ;;
     esac
     echo $out

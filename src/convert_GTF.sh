@@ -24,16 +24,14 @@ ft_bedToBigBed () {
     bedToBigBed \
         -type=bed12+8 \
         -tab \
-        -as=../data/bigGenePred.as \
-        $1 ../data/chrom.sizes $2
+        -as=../tmp/bigGenePred.as \
+        $1 ../tmp/chrom.sizes $2
 }
 
 ft_gtfToBigGenePred () {
     out="$2/$(basename "$1").bb"
 
-
     # check extension (GTF or GFF)
-
     echo Converting GTF to genePred...
     ft_gtfToGenePred $1
     echo Converting genePred to bigGenePred...
@@ -52,4 +50,4 @@ echo Removing tmp.genePred tmp.bigGenePred tmp.bigGenePred
 rm ../tmp/tmp.genePred ../tmp/tmp.bigGenePred
 echo Conversion from GTF to BigGenePred \( binary \) done !
 echo
-     }
+}

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 source convert_GTF.sh
+source convert_BAM.sh
+source utilities.sh
 
 # **************************************************************************** #
 # Define and check command line arguments
@@ -9,13 +11,15 @@ usage() { echo "Usage: $0
     [-o output directory (default: ../trackhub)]
     [-c convert files to be readable in the UCSC genome browser: yes or no (default: yes)]
     [-u URL where the data will be stored (default: https://regin.ens.fr/lehmann/Public/tmp)]
-    [-n name of the organism like described in UCSC (eg. hg38, mm9, galGal6) - (default: galGal6)]"
+    [-n name of the organism like described in UCSC (eg. hg38, mm9, galGal6) - (default: galGal6)]
+    [-n number of cores to use (default: max/2)]"
     1>&2; exit 1; }
 o='../trackhub'
 c='yes'
 u='https://regin.ens.fr/lehmann/Public/tmp'
 n='galGal6'
-while getopts ":i:o:c:u:n:" opt; do
+p='max/2'
+while getopts ":i:o:c:u:n:p:" opt; do
     case "${opt}" in
         i)
             i=${OPTARG} ;;
@@ -27,13 +31,15 @@ while getopts ":i:o:c:u:n:" opt; do
             u=${OPTARG} ;;
         n)
             n=${OPTARG} ;;
+        p)
+            p=${OPTARG} ;;
         *)
             usage ;;
     esac
 done
 shift $((OPTIND-1))
 if [ -z "$i" ] || [ -z "$o" ] || [ -z "$c" ] ||
-    [ -z "$u" ] || [ -z "$n" ]; then
+    [ -z "$u" ] || [ -z "$n" ] || [ -z "$p" ]; then
     usage
 fi
 
@@ -55,13 +61,23 @@ mkdir -p $o/$n
 # **************************************************************************** #
 if [ $c = 'yes' ]; then
     mkdir -p ../tmp
+    if [ ! -f ../tmp/bigGenePred.as ]; then
+        ft_get_helper_file
+    fi
+    if [ ! -f ../tmp/$n.chrom.sizes ]; then
+        ft_get_chrom_sizes $n
+    fi
     for FILE in ../data/*; do
         ext=${FILE##*\.}
         ext=$(echo $ext | awk '{print toupper($0)}')
-        if [ $ext = 'GTF' ]; then
-            echo Processing $ext file named $FILE
-            ft_gtfToBigGenePred $FILE $o/$n
-        fi
+        case "$ext" in
+            'GTF' )
+                echo Processing $ext file named $FILE
+                ft_gtfToBigGenePred $FILE $o/$n ;;
+            'BAM' )
+                echo Processing $ext file named $FILE
+                ft_bamToBigWig $FILE $o/$n $p;;
+        esac
     done
 fi
 
@@ -88,6 +104,8 @@ for FILE in $o/*; do
         echo shortLabel $F >> $o/$n/trackDb.txt
         echo longLabel $F >> $o/$n/trackDb.txt
         echo itemRgb on >> $o/$n/trackDb.txt
-        cp $Fpath $o/$n
+        if [ $c = 'no' ]; then
+            ln -s $Fpath $o/$n
+        fi
     fi
 done
