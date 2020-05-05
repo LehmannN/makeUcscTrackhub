@@ -9,8 +9,8 @@ cd makeUcscTrackhub/src/
 ```
 
 ## Run
-Here are some examples of how to run this code. Your data to be include in the trackhub (BAM, GTF...) needs to be in a folder called "../data/".
+Here are some examples of how to run this code. Your data to be include in the trackhub (BAM, GTF...) needs to be separated into 2 folders, one with files to convert (eg BAM to BigWig or GTF to BigBed) and the other one with files to keep without converting (BAM).
 
 ```{bash}
-./main.sh -i ../data/ -p 20 -n galGal6
+./main.sh -i ../data/convert -j ../data/noconvert -p 20 -n galGal6
 ```
