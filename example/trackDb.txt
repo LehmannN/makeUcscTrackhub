@@ -1,0 +1,190 @@
+track Ensembl_stringtie_guided.gtf.bb
+type bigBed
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/Ensembl_stringtie_guided.gtf.bb
+shortLabel Ensembl_stringtie_guided.gtf.bb
+longLabel Ensembl_stringtie_guided.gtf.bb
+itemRgb on
+visibility dense
+color 0,128,0
+
+track Ensembl_stringtie_merged.gtf.bb
+type bigBed
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/Ensembl_stringtie_merged.gtf.bb
+shortLabel Ensembl_stringtie_merged.gtf.bb
+longLabel Ensembl_stringtie_merged.gtf.bb
+itemRgb on
+visibility dense
+color 255,102,255
+
+track galGal6.ensGene.gtf.bb
+type bigBed
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/galGal6.ensGene.gtf.bb
+shortLabel galGal6.ensGene.gtf.bb
+longLabel galGal6.ensGene.gtf.bb
+itemRgb on
+visibility dense
+
+track galGal6.ncbiRefSeq.gtf.bb
+type bigBed
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/galGal6.ncbiRefSeq.gtf.bb
+shortLabel galGal6.ncbiRefSeq.gtf.bb
+longLabel galGal6.ncbiRefSeq.gtf.bb
+itemRgb on
+visibility dense
+
+track galGal6.refGene.gtf.bb
+type bigBed
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/galGal6.refGene.gtf.bb
+shortLabel galGal6.refGene.gtf.bb
+longLabel galGal6.refGene.gtf.bb
+itemRgb on
+visibility dense
+
+track gffcomp_ncbi.combined.gtf.bb
+type bigBed
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/gffcomp_ncbi.combined.gtf.bb
+shortLabel gffcomp_ncbi.combined.gtf.bb
+longLabel gffcomp_ncbi.combined.gtf.bb
+itemRgb on
+visibility dense
+
+track gffcomp_ncbi_R.combined.gtf.bb
+type bigBed
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/gffcomp_ncbi_R.combined.gtf.bb
+shortLabel gffcomp_ncbi_R.combined.gtf.bb
+longLabel gffcomp_ncbi_R.combined.gtf.bb
+itemRgb on
+visibility dense
+
+track gffcomp_ucsc.combined.gtf.bb
+type bigBed
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/gffcomp_ucsc.combined.gtf.bb
+shortLabel gffcomp_ucsc.combined.gtf.bb
+longLabel gffcomp_ucsc.combined.gtf.bb
+itemRgb on
+visibility dense
+
+track gffcomp_ucsc_R.combined.gtf.bb
+type bigBed
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/gffcomp_ucsc_R.combined.gtf.bb
+shortLabel gffcomp_ucsc_R.combined.gtf.bb
+longLabel gffcomp_ucsc_R.combined.gtf.bb
+itemRgb on
+visibility dense
+
+track NCBI_stringtie_guided.gtf.bb
+type bigBed
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/NCBI_stringtie_guided.gtf.bb
+shortLabel NCBI_stringtie_guided.gtf.bb
+longLabel NCBI_stringtie_guided.gtf.bb
+itemRgb on
+visibility dense
+
+track NCBI_stringtie_merged.gtf.bb
+type bigBed
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/NCBI_stringtie_merged.gtf.bb
+shortLabel NCBI_stringtie_merged.gtf.bb
+longLabel NCBI_stringtie_merged.gtf.bb
+itemRgb on
+visibility dense
+
+track ont_bc10.bam.bw
+type bigWig
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/ont_bc10.bam.bw
+shortLabel ont_bc10.bam.bw
+longLabel ont_bc10.bam.bw
+itemRgb on
+visibility dense
+
+track ont_bc11.bam.bw
+type bigWig
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/ont_bc11.bam.bw
+shortLabel ont_bc11.bam.bw
+longLabel ont_bc11.bam.bw
+itemRgb on
+visibility dense
+
+track ont_bc12.bam.bw
+type bigWig
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/ont_bc12.bam.bw
+shortLabel ont_bc12.bam.bw
+longLabel ont_bc12.bam.bw
+itemRgb on
+visibility dense
+
+track ont_merged.bam.bw
+type bigWig
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/ont_merged.bam.bw
+shortLabel ont_merged.bam.bw
+longLabel ont_merged.bam.bw
+itemRgb on
+visibility dense
+
+track scRNA_merged_UCSC.bam.bw
+type bigWig
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/scRNA_merged_UCSC.bam.bw
+shortLabel scRNA_merged_UCSC.bam.bw
+longLabel scRNA_merged_UCSC.bam.bw
+itemRgb on
+visibility dense
+
+track UCSC_stringtie_guided.gtf.bb
+type bigBed
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/UCSC_stringtie_guided.gtf.bb
+shortLabel UCSC_stringtie_guided.gtf.bb
+longLabel UCSC_stringtie_guided.gtf.bb
+itemRgb on
+visibility dense
+
+track UCSC_stringtie_merged.gtf.bb
+type bigBed
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/UCSC_stringtie_merged.gtf.bb
+shortLabel UCSC_stringtie_merged.gtf.bb
+longLabel UCSC_stringtie_merged.gtf.bb
+itemRgb on
+visibility dense
+
+track ont_bc10.bam
+type bam
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/ont_bc10.bam
+shortLabel ont_bc10.bam
+longLabel ont_bc10.bam
+itemRgb on
+visibility dense
+doWiggle on
+
+track ont_bc11.bam
+type bam
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/ont_bc11.bam
+shortLabel ont_bc11.bam
+longLabel ont_bc11.bam
+itemRgb on
+visibility dense
+doWiggle on
+
+track ont_bc12.bam
+type bam
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/ont_bc12.bam
+shortLabel ont_bc12.bam
+longLabel ont_bc12.bam
+itemRgb on
+visibility dense
+doWiggle on
+
+track ont_merged.bam
+type bam
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/ont_merged.bam
+shortLabel ont_merged.bam
+longLabel ont_merged.bam
+itemRgb on
+visibility dense
+doWiggle on
+
+track scRNA_merged_UCSC.bam
+type bam
+bigDataUrl https://regin.ens.fr/lehmann/Public/symasym_galGal6_2020_03/galGal6/scRNA_merged_UCSC.bam
+shortLabel scRNA_merged_UCSC.bam
+longLabel scRNA_merged_UCSC.bam
+itemRgb on
+visibility dense
+doWiggle on

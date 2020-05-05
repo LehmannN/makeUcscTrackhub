@@ -7,28 +7,29 @@ source utilities.sh
 # Define and check command line arguments
 # **************************************************************************** #
 usage() { echo "Usage: $0
-	[-i input directory (no default, enter the folder name where you have your input files)]
+	[-i input directory of files to convert to be readable in the UCSC genome browser (default: ../data/convert)]
+	[-j input directory of files to add to the trackhub without converting (default: ../data/noconvert)]
 	[-o output directory (default: ../trackhub)]
-	[-c convert files to be readable in the UCSC genome browser: yes or no (default: yes)]
 	[-u URL where the data will be stored (default: https://regin.ens.fr/lehmann/Public/tmp)]
 	[-n name of the organism like described in UCSC (eg. hg38, mm9, galGal6) - (default: galGal6)]
 	[-m name of the experiment - (default: galGal6_2020)]
 	[-p number of cores to use (default: max/2)]"
 	1>&2; exit 1; }
+	i='../data/convert'
+	j='../data/noconvert'
 	o='../trackhub'
-	c='yes'
 	u='https://regin.ens.fr/lehmann/Public/tmp'
 	n='galGal6'
 	m='galGal_2020'
 	p='max/2'
-	while getopts ":i:o:c:u:n:m:p:" opt; do
+	while getopts ":i:j:o:u:n:m:p:" opt; do
 		case "${opt}" in
 			i)
 				i=${OPTARG} ;;
+			j)
+				j=${OPTARG} ;;
 			o)
 				o=${OPTARG} ;;
-			c)
-				c=${OPTARG} ;;
 			u)
 				u=${OPTARG} ;;
 			n)
@@ -42,7 +43,7 @@ usage() { echo "Usage: $0
 		esac
 	done
 	shift $((OPTIND-1))
-	if [ -z "$i" ] || [ -z "$o" ] || [ -z "$c" ] ||
+	if [ -z "$i" ] || [ -z "$j" ] || [  -z "$o" ] ||
 		[ -z "$u" ] || [ -z "$n" ] || [ -z "$m" ] || [ -z "$p" ]; then
 	usage
 fi
@@ -52,8 +53,8 @@ fi
 # **************************************************************************** #
 if [ -d "$o" ]; then
 	echo WARNING: you already have an output directory with the name $o.
-	echo Please delete it or keep it somewhere else to pursue the analysis.
-	set -e
+	echo Please move it or rename it to pursue the analysis.
+	exit 1
 else
 	mkdir -p $o
 fi
@@ -63,7 +64,8 @@ mkdir -p $o/$n
 # **************************************************************************** #
 # Convert data if necessary
 # **************************************************************************** #
-if [ $c = 'yes' ]; then
+if [ ! -z "$(ls -A $i)" ]; then
+	echo Converting files in $i
 	mkdir -p ../tmp
 	if [ ! -f ../tmp/bigGenePred.as ]; then
 		ft_get_helper_file
@@ -71,7 +73,7 @@ if [ $c = 'yes' ]; then
 	if [ ! -f ../tmp/$n.chrom.sizes ]; then
 		ft_get_chrom_sizes $n
 	fi
-	for FILE in ../data/*; do
+	for FILE in $i/*; do
 		ext=${FILE##*\.}
 		ext=$(echo $ext | awk '{print toupper($0)}')
 		case "$ext" in
@@ -90,33 +92,38 @@ fi
 # **************************************************************************** #
 if [ -f $o/$n/trackDb.txt ]; then
 	echo WARNING: you already have a trackDB.txt file in the $o/$n directory.
-	echo Please delete it or keep it on an other folder to pursue the analysis.
+	echo It will be over-written.
 	rm $o/$n/trackDb.txt
-	set -e
+	touch $o/$n/trackDb.txt
 else
 	touch $o/$n/trackDb.txt
+fi
+
+if [ ! -z "$(ls -A $j)" ]; then
+	for FILE in $j/*; do
+		Fpath=$(readlink -f "$FILE")
+		ln -s $Fpath $o/$n
+	done
 fi
 
 FILES=$o/$n/*
 for FILE in $FILES; do
 	F=$(basename "$FILE")
-	if [ $FILE != 'trackDb.txt' ]; then
+	ext=${FILE##*\.}
+	if [ $F != 'trackDb.txt' ] && [ $ext != 'bai' ] ; then
 		Fpath=$(readlink -f "$FILE")
-		ext=${FILE##*\.}
 		echo Writing track for file $F in trackDb.txt
 		echo track $F >> $o/$n/trackDb.txt
 		if [ $ext == 'bw' ] || [ $ext == 'bb' ] ; then
 			ext=$(ft_convert_extension "$ext" )
 		fi
 		echo type $ext >> $o/$n/trackDb.txt
-		echo bigDataUrl $u/$F >> $o/$n/trackDb.txt
+		echo bigDataUrl $u/$n/$F >> $o/$n/trackDb.txt
 		echo shortLabel $F >> $o/$n/trackDb.txt
 		echo longLabel $F >> $o/$n/trackDb.txt
 		echo itemRgb on >> $o/$n/trackDb.txt
+		echo visibility dense >> $o/$n/trackDb.txt
 		echo >> $o/$n/trackDb.txt
-		#if [ $c = 'no' ]; then
-		#   ln -s $Fpath $o/$n
-		#fi
 	fi
 done
 
@@ -149,4 +156,4 @@ else
 fi
 
 echo genome $n > $o/genomes.txt
-echo trackDb $n/$o >> $o/genomes.txt
+echo trackDb $n/trackDb.txt >> $o/genomes.txt
